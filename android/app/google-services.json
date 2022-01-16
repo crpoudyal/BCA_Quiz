@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "644571177544",
+    "project_id": "bca-quiz-d0361",
+    "storage_bucket": "bca-quiz-d0361.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:644571177544:android:b61ce300fc01bc53266e7d",
+        "android_client_info": {
+          "package_name": "com.example.bca_quiz"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "644571177544-sr1qk86f7riu3plevf8bkguof375elo9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD_XlH8krAMCWWIq4R7ORzpjTXRyCr0FHA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "644571177544-sr1qk86f7riu3plevf8bkguof375elo9.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "644571177544-ma05cdperphv04aan9timo55mbkluuvc.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.bcaQuiz"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
