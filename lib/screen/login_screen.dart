@@ -22,17 +22,13 @@ class _LoginScreenState extends State<LoginScreen> {
     return Scaffold(
       body: SafeArea(
         child: Container(
-          padding: const EdgeInsets.symmetric(
-              horizontal: 32, vertical: double.infinity),
+          padding: const EdgeInsets.symmetric(horizontal: 32),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Flexible(
                 child: Container(),
                 flex: 1,
-              ),
-              Image.asset(
-                "assets/images/BCAquiz.png",
               ),
               const SizedBox(
                 height: 64,
@@ -41,6 +37,9 @@ class _LoginScreenState extends State<LoginScreen> {
                 textEditingController: _emailController,
                 hintText: "Enter your E-mail",
                 textInputType: TextInputType.emailAddress,
+              ),
+              const SizedBox(
+                height: 24,
               ),
               TextFieldInput(
                 textEditingController: _passwordController,
