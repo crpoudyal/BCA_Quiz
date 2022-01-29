@@ -19,6 +19,7 @@ class _SignupScreenState extends State<SignupScreen> {
   final TextEditingController _bioController = TextEditingController();
   final TextEditingController _usernameController = TextEditingController();
   Uint8List? _image;
+  bool _isLoading = false;
   void despose() {
     super.dispose();
     _emailController.dispose();
@@ -32,6 +33,25 @@ class _SignupScreenState extends State<SignupScreen> {
     setState(() {
       _image = img;
     });
+  }
+
+  void signUpUser() async {
+    setState(() {
+      _isLoading = true;
+    });
+    String res = await AuthMethods().signUpUser(
+      email: _emailController.text,
+      password: _passwordController.text,
+      username: _usernameController.text,
+      bio: _bioController.text,
+      file: _image!,
+    );
+    setState(() {
+      _isLoading = false;
+    });
+    if (res != 'success') {
+      showSnackBar(res, context);
+    }
   }
 
   @override
@@ -109,17 +129,14 @@ class _SignupScreenState extends State<SignupScreen> {
                 height: 24,
               ),
               TextButton(
-                onPressed: () async {
-                  String res = await AuthMethods().signUpUser(
-                    email: _emailController.text,
-                    password: _passwordController.text,
-                    username: _usernameController.text,
-                    bio: _bioController.text,
-                    file: _image!,
-                  );
-                  print(res);
-                },
-                child: const Text("Signup"),
+                onPressed: signUpUser,
+                child: _isLoading
+                    ? const Center(
+                        child: CircularProgressIndicator(
+                          color: Colors.white,
+                        ),
+                      )
+                    : const Text("Signup"),
                 style: TextButton.styleFrom(
                   primary: Colors.white,
                   backgroundColor: Colors.blue[700],
