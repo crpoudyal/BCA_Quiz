@@ -1,3 +1,4 @@
+import 'package:bca_quiz/resources/auth_method.dart';
 import 'package:bca_quiz/widgets/text_field_input.dart';
 import 'package:flutter/material.dart';
 
@@ -91,7 +92,14 @@ class _SignupScreenState extends State<SignupScreen> {
                 height: 24,
               ),
               TextButton(
-                onPressed: () {},
+                onPressed: () async {
+                  String res = await AuthMethods().signUpUser(
+                      email: _emailController.text,
+                      password: _passwordController.text,
+                      username: _usernameController.text,
+                      bio: _bioController.text);
+                  print(res);
+                },
                 child: const Text("Signup"),
                 style: TextButton.styleFrom(
                   primary: Colors.white,
