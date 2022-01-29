@@ -1,3 +1,5 @@
+import 'package:bca_quiz/resources/auth_method.dart';
+import 'package:bca_quiz/utils/utils.dart';
 import 'package:bca_quiz/widgets/text_field_input.dart';
 import 'package:flutter/material.dart';
 
@@ -11,10 +13,25 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+  bool _isLoading = false;
   void despose() {
     super.dispose();
     _emailController.dispose();
     _passwordController.dispose();
+  }
+
+  void loginUser() async {
+    setState(() {
+      _isLoading = true;
+    });
+    String res = await AuthMethods().loginUser(
+        email: _emailController.text, password: _passwordController.text);
+    setState(() {
+      _isLoading = false;
+    });
+    if (res != 'success') {
+      showSnackBar(res, context);
+    }
   }
 
   @override
@@ -51,8 +68,14 @@ class _LoginScreenState extends State<LoginScreen> {
                 height: 24,
               ),
               TextButton(
-                onPressed: () {},
-                child: const Text("Login"),
+                onPressed: loginUser,
+                child: _isLoading
+                    ? const Center(
+                        child: CircularProgressIndicator(
+                          color: Colors.white,
+                        ),
+                      )
+                    : const Text("Login"),
                 style: TextButton.styleFrom(
                   primary: Colors.white,
                   backgroundColor: Colors.blue[700],
