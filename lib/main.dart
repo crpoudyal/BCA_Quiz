@@ -1,5 +1,6 @@
 import 'package:bca_quiz/responsive/web_screen_layout.dart';
 import 'package:bca_quiz/screen/login_screen.dart';
+import 'package:bca_quiz/screen/signup_screen.dart';
 import 'package:bca_quiz/utils/colors.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
@@ -34,7 +35,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData.dark().copyWith(
         scaffoldBackgroundColor: mobileBackgroundColor,
       ),
-      home: const LoginScreen(),
+      home: const SignupScreen(),
       // home: const ResponsiveLayout(
       //   mobileScreenLayout: MobileScreenLayout(),
       //   webScreenLayout: WebScreenLayout(),
