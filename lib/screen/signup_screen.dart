@@ -1,6 +1,10 @@
 import 'dart:typed_data';
 
 import 'package:bca_quiz/resources/auth_method.dart';
+import 'package:bca_quiz/responsive/mobile_screen_layout.dart';
+import 'package:bca_quiz/responsive/responsive_layout_screen.dart';
+import 'package:bca_quiz/responsive/web_screen_layout.dart';
+import 'package:bca_quiz/screen/login_screen.dart';
 import 'package:bca_quiz/utils/utils.dart';
 import 'package:bca_quiz/widgets/text_field_input.dart';
 import 'package:flutter/material.dart';
@@ -51,7 +55,24 @@ class _SignupScreenState extends State<SignupScreen> {
     });
     if (res != 'success') {
       showSnackBar(res, context);
+    } else {
+      Navigator.of(context).pushReplacement(
+        MaterialPageRoute(
+          builder: (context) => const ResponsiveLayout(
+            mobileScreenLayout: MobileScreenLayout(),
+            webScreenLayout: WebScreenLayout(),
+          ),
+        ),
+      );
     }
+  }
+
+  void navigateToLogin() {
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => const LoginScreen(),
+      ),
+    );
   }
 
   @override
@@ -157,7 +178,7 @@ class _SignupScreenState extends State<SignupScreen> {
                     padding: const EdgeInsets.symmetric(vertical: 8),
                   ),
                   GestureDetector(
-                    onTap: () {},
+                    onTap: navigateToLogin,
                     child: Container(
                       child: const Text(
                         "Login",
