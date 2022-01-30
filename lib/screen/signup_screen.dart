@@ -88,8 +88,9 @@ class _SignupScreenState extends State<SignupScreen> {
                 child: Container(),
                 flex: 1,
               ),
-              const SizedBox(
-                height: 64,
+              Image.asset(
+                'assets/images/BCAquiz.png',
+                width: 150,
               ),
               Stack(
                 children: [

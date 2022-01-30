@@ -68,8 +68,9 @@ class _LoginScreenState extends State<LoginScreen> {
                 child: Container(),
                 flex: 1,
               ),
-              const SizedBox(
-                height: 64,
+              Image.asset(
+                'assets/images/BCAquiz.png',
+                width: 150,
               ),
               TextFieldInput(
                 textEditingController: _emailController,
