@@ -1,10 +1,5 @@
-import 'package:bca_quiz/providers/user_provider.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
+import 'package:bca_quiz/utils/colors.dart';
 import 'package:flutter/material.dart';
-import 'package:bca_quiz/models/user.dart' as model;
-import 'package:provider/provider.dart';
 
 class MobileScreenLayout extends StatefulWidget {
   const MobileScreenLayout({Key? key}) : super(key: key);
@@ -14,12 +9,73 @@ class MobileScreenLayout extends StatefulWidget {
 }
 
 class _MobileScreenLayoutState extends State<MobileScreenLayout> {
+  int _page = 0;
+  late PageController pageController;
+  @override
+  void initState() {
+    super.initState();
+    pageController = PageController();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    pageController.dispose();
+  }
+
+  void navigationTapped(int page) {
+    pageController.jumpToPage(page);
+  }
+
+  void onPageChanged(int page) {
+    setState(() {
+      _page = page;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-    model.User user = Provider.of<UserProvider>(context).getUser;
     return Scaffold(
-      body: Center(
-        child: Text(user.username),
+      body: PageView(
+        children: [
+          Text("Home"),
+          Text("Course"),
+          Text("Favorite"),
+          Text("Profile"),
+        ],
+        controller: pageController,
+        onPageChanged: onPageChanged,
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        type: BottomNavigationBarType.fixed,
+        backgroundColor: mobileBackgroundColor,
+        items: [
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home,
+                color: _page == 0 ? Colors.white : Colors.grey),
+            label: '',
+            backgroundColor: Colors.white,
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.book,
+                color: _page == 1 ? Colors.white : Colors.grey),
+            label: '',
+            backgroundColor: Colors.white,
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.favorite,
+                color: _page == 2 ? Colors.white : Colors.grey),
+            label: '',
+            backgroundColor: Colors.white,
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.person,
+                color: _page == 3 ? Colors.white : Colors.grey),
+            label: '',
+            backgroundColor: Colors.white,
+          ),
+        ],
+        onTap: navigationTapped,
       ),
     );
   }
