@@ -1,3 +1,4 @@
+import 'package:bca_quiz/screen/home_screen.dart';
 import 'package:bca_quiz/utils/colors.dart';
 import 'package:flutter/material.dart';
 
@@ -38,7 +39,7 @@ class _MobileScreenLayoutState extends State<MobileScreenLayout> {
     return Scaffold(
       body: PageView(
         children: [
-          Text("Home"),
+          HomeScreen(),
           Text("Course"),
           Text("Favorite"),
           Text("Profile"),
