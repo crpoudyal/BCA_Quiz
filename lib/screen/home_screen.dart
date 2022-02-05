@@ -19,6 +19,7 @@ class _HomeScreenState extends State<HomeScreen> {
           'assets/images/BCAquiz.png',
           height: 64,
         ),
+        centerTitle: true,
         actions: [
           IconButton(
             onPressed: () {},
@@ -28,6 +29,87 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       body: Column(
         children: [
+          Container(
+            height: 140,
+            color: Colors.black,
+            child: Padding(
+              padding: const EdgeInsets.only(left: 15, right: 15),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  const Text(
+                    'Prepare For Your Exam',
+                    style: TextStyle(color: Colors.white, fontSize: 24),
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: const [
+                      Icon(
+                        Icons.check_box,
+                        size: 12,
+                        color: Color(0xFF50DDF6),
+                      ),
+                      Text(
+                        " Quizes at any time anywhere",
+                        style: TextStyle(color: Colors.white, fontSize: 12),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 5,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: const [
+                      Icon(
+                        Icons.check_box,
+                        size: 12,
+                        color: Color(0xFF50DDF6),
+                      ),
+                      Text(
+                        " MCQ for all semester",
+                        style: TextStyle(color: Colors.white, fontSize: 12),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 8,
+                  ),
+                  TextButton(
+                    onPressed: () => {},
+                    child: const Padding(
+                      padding: EdgeInsets.fromLTRB(8, 1, 8, 1),
+                      child: Text(
+                        'Play Now',
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                    style: TextButton.styleFrom(
+                      primary: Colors.white,
+                      backgroundColor: Colors.blue,
+                    ),
+                  )
+                ],
+              ),
+            ),
+          ),
+          const Divider(
+            indent: 45,
+            endIndent: 45,
+            color: Colors.grey,
+          ),
+          const Text(
+            "Semester",
+            style: TextStyle(fontSize: 16),
+          ),
           Padding(
             padding: const EdgeInsets.all(10.0),
             child: GridView(
