@@ -31,7 +31,7 @@ class _HomeScreenState extends State<HomeScreen> {
         children: [
           Container(
             height: 140,
-            color: Colors.black,
+            color: mobileBackgroundColor,
             child: Padding(
               padding: const EdgeInsets.only(left: 15, right: 15),
               child: Column(
@@ -101,14 +101,13 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             ),
           ),
-          const Divider(
-            indent: 45,
-            endIndent: 45,
-            color: Colors.grey,
+          const SizedBox(
+            height: 8,
           ),
           const Text(
             "Semester",
-            style: TextStyle(fontSize: 16),
+            style: TextStyle(
+                fontSize: 16, color: Colors.black, fontWeight: FontWeight.bold),
           ),
           Padding(
             padding: const EdgeInsets.all(10.0),

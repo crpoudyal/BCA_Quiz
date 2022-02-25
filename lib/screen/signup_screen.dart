@@ -10,6 +10,8 @@ import 'package:bca_quiz/widgets/text_field_input.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
+import '../utils/colors.dart';
+
 class SignupScreen extends StatefulWidget {
   const SignupScreen({Key? key}) : super(key: key);
 
@@ -160,8 +162,9 @@ class _SignupScreenState extends State<SignupScreen> {
                       )
                     : const Text("Signup"),
                 style: TextButton.styleFrom(
+                  padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
                   primary: Colors.white,
-                  backgroundColor: Colors.blue[700],
+                  backgroundColor: mobileBottom,
                 ),
               ),
               const SizedBox(
@@ -183,7 +186,8 @@ class _SignupScreenState extends State<SignupScreen> {
                     child: Container(
                       child: const Text(
                         "Login",
-                        style: TextStyle(fontWeight: FontWeight.bold),
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold, color: mobileBottom),
                       ),
                       padding: const EdgeInsets.symmetric(vertical: 8),
                     ),

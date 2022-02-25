@@ -7,6 +7,8 @@ import 'package:bca_quiz/utils/utils.dart';
 import 'package:bca_quiz/widgets/text_field_input.dart';
 import 'package:flutter/material.dart';
 
+import '../utils/colors.dart';
+
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
 
@@ -99,8 +101,9 @@ class _LoginScreenState extends State<LoginScreen> {
                       )
                     : const Text("Login"),
                 style: TextButton.styleFrom(
+                  padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
                   primary: Colors.white,
-                  backgroundColor: Colors.blue[700],
+                  backgroundColor: mobileBottom,
                 ),
               ),
               const SizedBox(
@@ -122,7 +125,8 @@ class _LoginScreenState extends State<LoginScreen> {
                     child: Container(
                       child: const Text(
                         "Sign Up",
-                        style: TextStyle(fontWeight: FontWeight.bold),
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold, color: mobileBottom),
                       ),
                       padding: const EdgeInsets.symmetric(vertical: 8),
                     ),

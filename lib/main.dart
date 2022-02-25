@@ -44,7 +44,7 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         title: 'BCA Quiz',
         theme: ThemeData.dark().copyWith(
-          scaffoldBackgroundColor: mobileBackgroundColor,
+          scaffoldBackgroundColor: backgroundColor,
         ),
         home: StreamBuilder(
           stream: FirebaseAuth.instance.authStateChanges(),
