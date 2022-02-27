@@ -53,25 +53,25 @@ class _MobileScreenLayoutState extends State<MobileScreenLayout> {
         items: [
           BottomNavigationBarItem(
             icon: Icon(Icons.home,
-                color: _page == 0 ? Colors.white : Colors.grey),
+                color: _page == 0 ? mobileBottom : Colors.grey),
             label: '',
             backgroundColor: Colors.white,
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.book,
-                color: _page == 1 ? Colors.white : Colors.grey),
+                color: _page == 1 ? mobileBottom : Colors.grey),
             label: '',
             backgroundColor: Colors.white,
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.favorite,
-                color: _page == 2 ? Colors.white : Colors.grey),
+                color: _page == 2 ? mobileBottom : Colors.grey),
             label: '',
             backgroundColor: Colors.white,
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.person,
-                color: _page == 3 ? Colors.white : Colors.grey),
+                color: _page == 3 ? mobileBottom : Colors.grey),
             label: '',
             backgroundColor: Colors.white,
           ),
