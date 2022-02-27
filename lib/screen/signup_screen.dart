@@ -70,7 +70,7 @@ class _SignupScreenState extends State<SignupScreen> {
   }
 
   void navigateToLogin() {
-    Navigator.of(context).push(
+    Navigator.of(context).pushReplacement(
       MaterialPageRoute(
         builder: (context) => const LoginScreen(),
       ),
@@ -82,6 +82,9 @@ class _SignupScreenState extends State<SignupScreen> {
     return Scaffold(
       body: SafeArea(
         child: Container(
+          decoration: const BoxDecoration(
+            color: mobileBackgroundColor,
+          ),
           padding: const EdgeInsets.symmetric(horizontal: 32),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,

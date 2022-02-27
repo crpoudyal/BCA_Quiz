@@ -62,6 +62,9 @@ class _LoginScreenState extends State<LoginScreen> {
     return Scaffold(
       body: SafeArea(
         child: Container(
+          decoration: const BoxDecoration(
+            color: mobileBackgroundColor,
+          ),
           padding: const EdgeInsets.symmetric(horizontal: 32),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
