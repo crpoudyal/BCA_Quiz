@@ -14,6 +14,10 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: const Visibility(
+          child: Text(''),
+          visible: false,
+        ),
         backgroundColor: mobileBackgroundColor,
         title: Image.asset(
           'assets/images/BCAquiz.png',

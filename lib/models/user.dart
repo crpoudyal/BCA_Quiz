@@ -20,6 +20,17 @@ class User {
     required this.following,
   });
 
+  factory User.fromjson(Map<String, dynamic> json) {
+    return User(
+      email: json['email'],
+      username: json['username'],
+      photoUrl: json['photoUrl'],
+      uid: json['uid'],
+      bio: json['bio'],
+      followers: json['followers'],
+      following: json['following'],
+    );
+  }
   Map<String, dynamic> toJson() => {
         'username': username,
         'uid': uid,
