@@ -1,5 +1,7 @@
 import 'package:bca_quiz/screen/home_screen.dart';
+import 'package:bca_quiz/screen/profile_screen.dart';
 import 'package:bca_quiz/utils/colors.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class MobileScreenLayout extends StatefulWidget {
@@ -42,7 +44,9 @@ class _MobileScreenLayoutState extends State<MobileScreenLayout> {
           HomeScreen(),
           Text("Course"),
           Text("Favorite"),
-          Text("Profile"),
+          ProfileScreen(
+            uid: FirebaseAuth.instance.currentUser!.uid,
+          ),
         ],
         controller: pageController,
         onPageChanged: onPageChanged,
