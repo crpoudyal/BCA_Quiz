@@ -1,4 +1,5 @@
 import 'package:bca_quiz/utils/colors.dart';
+import 'package:bca_quiz/utils/utils.dart';
 import 'package:bca_quiz/widgets/follow_button.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -12,7 +13,9 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
-  var userData = {};
+  Map<String, dynamic> userData = {};
+  int followers = 0;
+  int following = 0;
 
   @override
   void initState() {
@@ -26,93 +29,104 @@ class _ProfileScreenState extends State<ProfileScreen> {
           .collection('users')
           .doc(widget.uid)
           .get();
-      userData = userSnap.data()!;
       print(userSnap.data());
+      setState(() {
+        userData = userSnap.data()!;
+      });
     } catch (e) {
-      print(e.toString());
+      showSnackBar(e.toString(), context);
     }
   }
 
   @override
   Widget build(BuildContext context) {
+    print(userData.isEmpty);
     return Scaffold(
       appBar: AppBar(
         backgroundColor: mobileBackgroundColor,
         title: Text(
-          userData['username'],
+          userData['username'] ?? '',
         ),
         centerTitle: false,
       ),
-      body: ListView(
-        children: [
-          Container(
-            color: mobileBackgroundColor,
-            child: Padding(
-              padding: const EdgeInsets.all(16),
-              child: Column(
-                children: [
-                  Row(
-                    children: [
-                      CircleAvatar(
-                        backgroundColor: Colors.grey,
-                        backgroundImage: NetworkImage(
-                          userData['photoUrl'],
-                        ),
-                        radius: 40,
-                      ),
-                      Expanded(
-                        flex: 1,
-                        child: Column(
+      body: userData.isEmpty
+          ? const Center(child: CircularProgressIndicator())
+          : ListView(
+              children: [
+                Container(
+                  color: mobileBackgroundColor,
+                  child: Padding(
+                    padding: const EdgeInsets.all(16),
+                    child: Column(
+                      children: [
+                        Row(
                           children: [
-                            Row(
-                              mainAxisSize: MainAxisSize.max,
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: [
-                                buildStatColumn(700, "Followers"),
-                                buildStatColumn(226, "Following"),
-                                buildStatColumn(206, "Ranking"),
-                              ],
+                            CircleAvatar(
+                              backgroundColor: Colors.grey,
+                              backgroundImage: NetworkImage(
+                                userData['photoUrl'],
+                              ),
+                              radius: 40,
                             ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: [
-                                FollowButton(
-                                  text: "Edit profile",
-                                  backgroundColor: mobileBackgroundColor,
-                                  textColor: Colors.white,
-                                  borderColor: Colors.grey,
-                                  function: () {},
-                                ),
-                              ],
+                            Expanded(
+                              flex: 1,
+                              child: Column(
+                                children: [
+                                  Column(
+                                    mainAxisSize: MainAxisSize.max,
+                                    children: [
+                                      Container(
+                                        alignment: Alignment.center,
+                                        padding: const EdgeInsets.only(top: 1),
+                                        child: Text(
+                                          userData['bio'],
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  Row(
+                                    mainAxisSize: MainAxisSize.max,
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceEvenly,
+                                    children: [
+                                      buildStatColumn(followers, "Followers"),
+                                      buildStatColumn(following, "Following"),
+                                    ],
+                                  ),
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceEvenly,
+                                    children: [
+                                      FollowButton(
+                                        text: "Edit profile",
+                                        backgroundColor: mobileBackgroundColor,
+                                        textColor: Colors.white,
+                                        borderColor: Colors.grey,
+                                        function: () {},
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
                             ),
                           ],
                         ),
-                      ),
-                    ],
-                  ),
-                  Container(
-                    alignment: Alignment.centerLeft,
-                    padding: const EdgeInsets.only(top: 15),
-                    child: Text(
-                      userData['username'],
-                      style: const TextStyle(
-                        fontWeight: FontWeight.bold,
-                      ),
+                        Container(
+                          alignment: Alignment.centerLeft,
+                          padding: const EdgeInsets.only(top: 15),
+                          child: Text(
+                            userData['username'],
+                            style: const TextStyle(
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
                   ),
-                  Container(
-                    alignment: Alignment.centerLeft,
-                    padding: const EdgeInsets.only(top: 1),
-                    child: Text(
-                      userData['bio'],
-                    ),
-                  ),
-                ],
-              ),
+                )
+              ],
             ),
-          )
-        ],
-      ),
     );
   }
 

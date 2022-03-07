@@ -38,14 +38,15 @@ class _MobileScreenLayoutState extends State<MobileScreenLayout> {
 
   @override
   Widget build(BuildContext context) {
+    String uid = FirebaseAuth.instance.currentUser!.uid;
     return Scaffold(
       body: PageView(
         children: [
           HomeScreen(),
-          Text("Course"),
-          Text("Favorite"),
+          Container(color: Colors.green),
+          Container(color: Colors.amber),
           ProfileScreen(
-            uid: FirebaseAuth.instance.currentUser!.uid,
+            uid: uid,
           ),
         ],
         controller: pageController,
