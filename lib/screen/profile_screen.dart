@@ -124,7 +124,59 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       ],
                     ),
                   ),
-                )
+                ),
+                Column(
+                  children: [
+                    ListTile(
+                      trailing: const IconButton(
+                        icon: Icon(
+                          Icons.edit_sharp,
+                          color: mobileBackgroundColor,
+                        ),
+                        onPressed: null,
+                      ),
+                      textColor: mobileBackgroundColor,
+                      title: const Text(
+                        "Name",
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold, fontSize: 18),
+                      ),
+                      subtitle: Text(userData['username'] ?? ''),
+                    ),
+                    ListTile(
+                      trailing: const IconButton(
+                        icon: Icon(
+                          Icons.edit_sharp,
+                          color: mobileBackgroundColor,
+                        ),
+                        onPressed: null,
+                      ),
+                      textColor: mobileBackgroundColor,
+                      title: const Text(
+                        "Email",
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold, fontSize: 18),
+                      ),
+                      subtitle: Text(userData['email'] ?? ''),
+                    ),
+                    ListTile(
+                      trailing: const IconButton(
+                        icon: Icon(
+                          Icons.edit_sharp,
+                          color: mobileBackgroundColor,
+                        ),
+                        onPressed: null,
+                      ),
+                      textColor: mobileBackgroundColor,
+                      title: const Text(
+                        "Biography",
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold, fontSize: 18),
+                      ),
+                      subtitle: Text(userData['bio'] ?? ''),
+                    ),
+                  ],
+                ),
               ],
             ),
     );
