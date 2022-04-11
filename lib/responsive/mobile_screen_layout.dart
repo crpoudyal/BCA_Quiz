@@ -1,3 +1,4 @@
+import 'package:bca_quiz/screen/course_screen.dart';
 import 'package:bca_quiz/screen/home_screen.dart';
 import 'package:bca_quiz/screen/profile_screen.dart';
 import 'package:bca_quiz/utils/colors.dart';
@@ -43,7 +44,7 @@ class _MobileScreenLayoutState extends State<MobileScreenLayout> {
       body: PageView(
         children: [
           HomeScreen(),
-          Container(color: Colors.green),
+          CourseScreen(),
           Container(color: Colors.amber),
           ProfileScreen(
             uid: uid,

@@ -72,18 +72,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               flex: 1,
                               child: Column(
                                 children: [
-                                  Column(
-                                    mainAxisSize: MainAxisSize.max,
-                                    children: [
-                                      Container(
-                                        alignment: Alignment.center,
-                                        padding: const EdgeInsets.only(top: 1),
-                                        child: Text(
-                                          userData['bio'],
-                                        ),
-                                      ),
-                                    ],
-                                  ),
                                   Row(
                                     mainAxisSize: MainAxisSize.max,
                                     mainAxisAlignment:
@@ -115,7 +103,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           alignment: Alignment.centerLeft,
                           padding: const EdgeInsets.only(top: 15),
                           child: Text(
-                            userData['username'],
+                            userData['bio'],
                             style: const TextStyle(
                               fontWeight: FontWeight.bold,
                             ),
