@@ -1,5 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/material.dart';
 
 class User {
   final String email;
@@ -20,7 +19,7 @@ class User {
     required this.following,
   });
 
-  factory User.fromjson(Map<String, dynamic> json) {
+  factory User.fromjson(Map<dynamic, dynamic> json) {
     return User(
       email: json['email'],
       username: json['username'],
@@ -42,7 +41,7 @@ class User {
       };
 
   static User fromSnap(DocumentSnapshot snap) {
-    var snapshot = snap.data() as Map<String, dynamic>;
+    var snapshot = snap.data() as Map<dynamic, dynamic>;
     return User(
         email: snapshot['email'],
         username: snapshot['username'],

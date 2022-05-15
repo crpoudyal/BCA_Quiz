@@ -3,7 +3,6 @@ import 'package:bca_quiz/responsive/mobile_screen_layout.dart';
 import 'package:bca_quiz/responsive/responsive_layout_screen.dart';
 import 'package:bca_quiz/responsive/web_screen_layout.dart';
 import 'package:bca_quiz/screen/login_screen.dart';
-import 'package:bca_quiz/screen/signup_screen.dart';
 import 'package:bca_quiz/utils/colors.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';

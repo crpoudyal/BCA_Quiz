@@ -2,7 +2,9 @@ import 'package:bca_quiz/screen/course_screen.dart';
 import 'package:bca_quiz/screen/home_screen.dart';
 import 'package:bca_quiz/screen/profile_screen.dart';
 import 'package:bca_quiz/utils/colors.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 
 class MobileScreenLayout extends StatefulWidget {
@@ -15,6 +17,7 @@ class MobileScreenLayout extends StatefulWidget {
 class _MobileScreenLayoutState extends State<MobileScreenLayout> {
   int _page = 0;
   late PageController pageController;
+
   @override
   void initState() {
     super.initState();
@@ -40,11 +43,15 @@ class _MobileScreenLayoutState extends State<MobileScreenLayout> {
   @override
   Widget build(BuildContext context) {
     String uid = FirebaseAuth.instance.currentUser!.uid;
+    print("-------" + uid);
+    String sid = "";
     return Scaffold(
       body: PageView(
         children: [
           HomeScreen(),
-          CourseScreen(),
+          CourseScreen(
+            sid: sid,
+          ),
           Container(color: Colors.amber),
           ProfileScreen(
             uid: uid,

@@ -4,7 +4,6 @@ import 'package:bca_quiz/models/user.dart' as model;
 import 'package:bca_quiz/resources/storage_method.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/material.dart';
 
 class AuthMethods {
   final FirebaseAuth _auth = FirebaseAuth.instance;
@@ -41,7 +40,6 @@ class AuthMethods {
         String photoUrl = await StorageMethod()
             .uploadImageToStorage('profilePics', file, false);
 
-        print(cred.user!.uid);
         // Add user to database
 
         model.User user = model.User(
