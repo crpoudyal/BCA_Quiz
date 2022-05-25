@@ -55,7 +55,7 @@ class _CourseScreenState extends State<CourseScreen> {
         title: const Text("sixth sem"),
       ),
       body: secSemester.isEmpty
-          ? CircularProgressIndicator()
+          ? const Center(child: CircularProgressIndicator())
           : ListView.builder(
               itemCount: secSemester.length,
               itemBuilder: (context, index) => Column(

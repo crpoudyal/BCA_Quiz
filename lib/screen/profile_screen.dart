@@ -1,7 +1,10 @@
+import 'package:bca_quiz/resources/auth_method.dart';
+import 'package:bca_quiz/screen/login_screen.dart';
 import 'package:bca_quiz/utils/colors.dart';
 import 'package:bca_quiz/utils/utils.dart';
 import 'package:bca_quiz/widgets/follow_button.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class ProfileScreen extends StatefulWidget {
@@ -16,6 +19,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   Map<String, dynamic> userData = {};
   int followers = 0;
   int following = 0;
+  bool isFollowing = false;
 
   @override
   void initState() {
@@ -30,6 +34,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
           .doc(widget.uid)
           .get();
       print(userSnap.data());
+      userData = userSnap.data()!;
+      followers = userSnap.data()!['followers'].length;
+      following = userSnap.data()!['following'].length;
+      isFollowing = userSnap
+          .data()!['followers']
+          .contains(FirebaseAuth.instance.currentUser!.uid);
       setState(() {
         userData = userSnap.data()!;
       });
@@ -64,7 +74,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             CircleAvatar(
                               backgroundColor: Colors.grey,
                               backgroundImage: NetworkImage(
-                                userData['photoUrl'],
+                                userData['photoUrl'] ?? '',
                               ),
                               radius: 40,
                             ),
@@ -85,13 +95,40 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceEvenly,
                                     children: [
-                                      FollowButton(
-                                        text: "Edit profile",
-                                        backgroundColor: mobileBackgroundColor,
-                                        textColor: Colors.white,
-                                        borderColor: Colors.grey,
-                                        function: () {},
-                                      ),
+                                      FirebaseAuth.instance.currentUser!.uid ==
+                                              widget.uid
+                                          ? FollowButton(
+                                              text: "Sign Out",
+                                              backgroundColor:
+                                                  mobileBackgroundColor,
+                                              textColor: Colors.white,
+                                              borderColor: Colors.grey,
+                                              function: () async {
+                                                await AuthMethods().signOut();
+                                                Navigator.of(context)
+                                                    .pushReplacement(
+                                                  MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        const LoginScreen(),
+                                                  ),
+                                                );
+                                              },
+                                            )
+                                          : isFollowing
+                                              ? FollowButton(
+                                                  text: "Unfollow",
+                                                  backgroundColor: Colors.white,
+                                                  textColor: Colors.black,
+                                                  borderColor: Colors.grey,
+                                                  function: () {},
+                                                )
+                                              : FollowButton(
+                                                  text: "Follow",
+                                                  backgroundColor: Colors.blue,
+                                                  textColor: Colors.white,
+                                                  borderColor: Colors.blue,
+                                                  function: () {},
+                                                )
                                     ],
                                   ),
                                 ],
@@ -103,7 +140,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           alignment: Alignment.centerLeft,
                           padding: const EdgeInsets.only(top: 15),
                           child: Text(
-                            userData['bio'],
+                            userData['bio'] ?? '',
                             style: const TextStyle(
                               fontWeight: FontWeight.bold,
                             ),
