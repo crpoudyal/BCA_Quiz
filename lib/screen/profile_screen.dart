@@ -1,4 +1,5 @@
 import 'package:bca_quiz/resources/auth_method.dart';
+import 'package:bca_quiz/resources/firestore_methods.dart';
 import 'package:bca_quiz/screen/login_screen.dart';
 import 'package:bca_quiz/utils/colors.dart';
 import 'package:bca_quiz/utils/utils.dart';
@@ -120,14 +121,36 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                                   backgroundColor: Colors.white,
                                                   textColor: Colors.black,
                                                   borderColor: Colors.grey,
-                                                  function: () {},
+                                                  function: () async {
+                                                    await FirestoreMethods()
+                                                        .followUser(
+                                                      FirebaseAuth.instance
+                                                          .currentUser!.uid,
+                                                      userData['uid'],
+                                                    );
+                                                    setState(() {
+                                                      isFollowing = false;
+                                                      followers--;
+                                                    });
+                                                  },
                                                 )
                                               : FollowButton(
                                                   text: "Follow",
                                                   backgroundColor: Colors.blue,
                                                   textColor: Colors.white,
                                                   borderColor: Colors.blue,
-                                                  function: () {},
+                                                  function: () async {
+                                                    await FirestoreMethods()
+                                                        .followUser(
+                                                      FirebaseAuth.instance
+                                                          .currentUser!.uid,
+                                                      userData['uid'],
+                                                    );
+                                                    setState(() {
+                                                      isFollowing = true;
+                                                      followers++;
+                                                    });
+                                                  },
                                                 )
                                     ],
                                   ),

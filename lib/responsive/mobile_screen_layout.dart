@@ -1,6 +1,7 @@
 import 'package:bca_quiz/screen/course_screen.dart';
 import 'package:bca_quiz/screen/home_screen.dart';
 import 'package:bca_quiz/screen/profile_screen.dart';
+import 'package:bca_quiz/screen/search_screen.dart';
 import 'package:bca_quiz/utils/colors.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -49,6 +50,7 @@ class _MobileScreenLayoutState extends State<MobileScreenLayout> {
       body: PageView(
         children: [
           HomeScreen(),
+          SearchScreen(),
           CourseScreen(
             sid: sid,
           ),
