@@ -1,11 +1,11 @@
+import 'dart:developer';
+
 import 'package:bca_quiz/screen/course_screen.dart';
 import 'package:bca_quiz/screen/home_screen.dart';
 import 'package:bca_quiz/screen/profile_screen.dart';
 import 'package:bca_quiz/screen/search_screen.dart';
 import 'package:bca_quiz/utils/colors.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 
 class MobileScreenLayout extends StatefulWidget {
@@ -44,7 +44,7 @@ class _MobileScreenLayoutState extends State<MobileScreenLayout> {
   @override
   Widget build(BuildContext context) {
     String uid = FirebaseAuth.instance.currentUser!.uid;
-    print("-------" + uid);
+    log("user ID: " + uid.toString());
     String sid = "";
     return Scaffold(
       body: PageView(

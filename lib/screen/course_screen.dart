@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:bca_quiz/models/subject.dart';
 import 'package:bca_quiz/utils/colors.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -17,30 +19,29 @@ class _CourseScreenState extends State<CourseScreen> {
   Map<dynamic, dynamic> courseData = {};
 
   List<Subject> subject = [];
-  List<Subject> secSemester = [];
+  List<Subject> semester = [];
 
   @override
   void initState() {
     super.initState();
-    print("Initstate -----------");
     getData();
   }
 
   getData() async {
     try {
       var courseSnap =
-          await FirebaseFirestore.instance.collection('subject').snapshots();
-      print("DATA-----");
+          FirebaseFirestore.instance.collection('subject').snapshots();
       courseSnap.forEach((element) {
         element.docs.forEach((element) {
-          print(element.data());
+          log(element.data().toString());
 
           setState(() {
+            int x = 3;
             subject.add(Subject.fromSnap(element));
-            secSemester =
-                subject.where((element) => element.semester == 2).toList();
+            semester =
+                subject.where((element) => element.semester == x).toList();
           });
-          print(secSemester.length);
+          log(semester.length.toString());
         });
       });
     } catch (e) {
@@ -50,31 +51,64 @@ class _CourseScreenState extends State<CourseScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text("sixth sem"),
-      ),
-      body: secSemester.isEmpty
-          ? const Center(child: CircularProgressIndicator())
-          : ListView.builder(
-              itemCount: secSemester.length,
-              itemBuilder: (context, index) => Column(
-                children: [
-                  InkWell(
-                    onTap: null,
-                    child: ListTile(
-                      textColor: mobileBackgroundColor,
-                      title: Text(
-                        secSemester[index].sub_name,
-                        style: const TextStyle(
-                            fontWeight: FontWeight.bold, fontSize: 18),
-                      ),
-                      subtitle: Text(secSemester[index].sub_code),
-                    ),
-                  ),
-                ],
+    return DefaultTabController(
+      length: 8,
+      child: Scaffold(
+        appBar: AppBar(
+          backgroundColor: mobileBackgroundColor,
+          title: const Text("Courses"),
+          centerTitle: true,
+          bottom: const TabBar(
+            tabs: [
+              Tab(
+                text: '1',
               ),
-            ),
+              Tab(
+                text: '2',
+              ),
+              Tab(
+                text: '3',
+              ),
+              Tab(
+                text: '4',
+              ),
+              Tab(
+                text: '5',
+              ),
+              Tab(
+                text: '6',
+              ),
+              Tab(
+                text: '7',
+              ),
+              Tab(
+                text: '8',
+              ),
+            ],
+          ),
+        ),
+        body: semester.isEmpty
+            ? const Center(child: CircularProgressIndicator())
+            : ListView.builder(
+                itemCount: semester.length,
+                itemBuilder: (context, index) => Column(
+                  children: [
+                    InkWell(
+                      onTap: null,
+                      child: ListTile(
+                        textColor: mobileBackgroundColor,
+                        title: Text(
+                          semester[index].sub_name,
+                          style: const TextStyle(
+                              fontWeight: FontWeight.bold, fontSize: 18),
+                        ),
+                        subtitle: Text(semester[index].sub_code),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+      ),
     );
   }
 }

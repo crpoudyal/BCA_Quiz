@@ -56,7 +56,6 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: const [
                       Icon(
                         Icons.check_box,
@@ -74,7 +73,6 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: const [
                       Icon(
                         Icons.check_box,

@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:bca_quiz/resources/auth_method.dart';
 import 'package:bca_quiz/resources/firestore_methods.dart';
 import 'package:bca_quiz/screen/login_screen.dart';
@@ -34,7 +36,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
           .collection('users')
           .doc(widget.uid)
           .get();
-      print(userSnap.data());
+      log(userSnap.data().toString());
       userData = userSnap.data()!;
       followers = userSnap.data()!['followers'].length;
       following = userSnap.data()!['following'].length;
@@ -51,7 +53,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   @override
   Widget build(BuildContext context) {
-    print(userData.isEmpty);
+    log(userData.isEmpty.toString());
     return Scaffold(
       appBar: AppBar(
         backgroundColor: mobileBackgroundColor,

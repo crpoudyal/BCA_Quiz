@@ -1,7 +1,6 @@
 import 'package:bca_quiz/screen/profile_screen.dart';
 import 'package:bca_quiz/utils/colors.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
 class SearchScreen extends StatefulWidget {

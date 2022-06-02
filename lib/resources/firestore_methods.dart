@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class FirestoreMethods {
@@ -26,7 +28,7 @@ class FirestoreMethods {
         });
       }
     } catch (e) {
-      print(e.toString());
+      log(e.toString());
     }
   }
 }
