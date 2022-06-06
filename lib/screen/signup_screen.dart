@@ -159,13 +159,16 @@ class _SignupScreenState extends State<SignupScreen> {
                 onPressed: signUpUser,
                 child: _isLoading
                     ? const Center(
-                        child: CircularProgressIndicator(
-                          color: Colors.white,
+                        child: Padding(
+                          padding: EdgeInsets.all(5.0),
+                          child: CircularProgressIndicator(
+                            color: Colors.white,
+                          ),
                         ),
                       )
                     : const Text("Signup"),
                 style: TextButton.styleFrom(
-                  padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
+                  padding: const EdgeInsets.fromLTRB(60, 0, 60, 0),
                   primary: Colors.white,
                   backgroundColor: mobileBottom,
                 ),

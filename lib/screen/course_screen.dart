@@ -1,10 +1,8 @@
 import 'dart:developer';
-
 import 'package:bca_quiz/models/subject.dart';
 import 'package:bca_quiz/utils/colors.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-
 import '../utils/utils.dart';
 
 class CourseScreen extends StatefulWidget {
@@ -32,17 +30,16 @@ class _CourseScreenState extends State<CourseScreen> {
       var courseSnap =
           FirebaseFirestore.instance.collection('subject').snapshots();
       courseSnap.forEach((element) {
-        element.docs.forEach((element) {
+        for (var element in element.docs) {
           log(element.data().toString());
 
           setState(() {
-            int x = 3;
             subject.add(Subject.fromSnap(element));
             semester =
-                subject.where((element) => element.semester == x).toList();
+                subject.where((element) => element.semester == 1).toList();
           });
           log(semester.length.toString());
-        });
+        }
       });
     } catch (e) {
       showSnackBar(e.toString(), context);
