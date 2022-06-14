@@ -1,6 +1,10 @@
+import 'dart:developer';
+
 import 'package:bca_quiz/utils/colors.dart';
 import 'package:bca_quiz/widgets/sem_container.dart';
 import 'package:flutter/material.dart';
+import 'package:html/parser.dart';
+import 'package:http/http.dart' as http;
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -10,23 +14,61 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  List<String> titles = [];
+  List<String> dates = [];
+  List<String> dlinks = [];
+
+  @override
+  void initState() {
+    super.initState();
+    getDataFromWeb();
+  }
+
+  Future getDataFromWeb() async {
+    final url = Uri.parse('https://www.tufohss.edu.np/index.php/notices/');
+    final response = await http.get(url);
+    final body = response.body;
+    final html = parse(body);
+    final titles = html
+        .querySelectorAll(' tbody > tr:not(:first-child) > td:first-child')
+        .map((element) => element.innerHtml.trim())
+        .toList();
+    log(titles.toString());
+    final dates = html
+        .querySelectorAll('tbody>tr:not(:first-child)>td:nth-child(1)')
+        .map((e) => e.innerHtml.trim())
+        .toList();
+    final dlinks = html
+        .querySelectorAll('tbody>tr:not(:first-child)>td:nth-child(2)>a')
+        .map((e) => e.innerHtml.trim())
+        .toList();
+    log(dlinks.toString());
+    setState(() {
+      this.titles = titles;
+      this.dates = dates;
+      this.dlinks = dlinks;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: const IconButton(
-          onPressed: null,
-          icon: Icon(
-            Icons.menu,
-            color: Colors.white,
-          ),
-        ),
         backgroundColor: mobileBackgroundColor,
-        title: Image.asset(
-          'assets/images/BCAquiz.png',
-          height: 64,
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            Image.asset(
+              'assets/images/BCAquiz.png',
+              height: 64,
+            ),
+            const SizedBox(
+              width: 92,
+            ),
+            const Text("BCA Quiz"),
+          ],
         ),
-        centerTitle: true,
+        centerTitle: false,
         actions: [
           IconButton(
             onPressed: () {},
@@ -130,6 +172,47 @@ class _HomeScreenState extends State<HomeScreen> {
                 semContainer("Seventh", Colors.deepOrangeAccent, Icons.code),
                 semContainer("Eighth", Colors.brown, Icons.code),
               ],
+            ),
+          ),
+          const SizedBox(
+            height: 8,
+          ),
+          const Text(
+            "Notices",
+            style: TextStyle(
+                fontSize: 16, color: Colors.black, fontWeight: FontWeight.bold),
+          ),
+          Expanded(
+            child: SizedBox(
+              child: ListView.builder(
+                itemCount: titles.length,
+                itemBuilder: (context, index) {
+                  final title = titles[index];
+                  final date = dates[index];
+                  final dlink = dlinks[index];
+                  return ListTile(
+                    title: Text(
+                      title,
+                      style: const TextStyle(
+                          fontSize: 16,
+                          color: Colors.black,
+                          fontWeight: FontWeight.bold),
+                    ),
+                    subtitle: Text(
+                      date,
+                      style: const TextStyle(
+                        fontSize: 16,
+                        color: Colors.black,
+                      ),
+                    ),
+                    trailing: IconButton(
+                      icon: const Icon(Icons.download),
+                      color: mobileBackgroundColor,
+                      onPressed: () {},
+                    ),
+                  );
+                },
+              ),
             ),
           ),
         ],
