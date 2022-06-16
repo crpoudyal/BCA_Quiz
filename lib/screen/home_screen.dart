@@ -1,10 +1,12 @@
 import 'dart:developer';
 
+import 'package:bca_quiz/screen/course_screen.dart';
 import 'package:bca_quiz/utils/colors.dart';
 import 'package:bca_quiz/widgets/sem_container.dart';
 import 'package:flutter/material.dart';
 import 'package:html/parser.dart';
 import 'package:http/http.dart' as http;
+import 'package:url_launcher/url_launcher_string.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -17,6 +19,7 @@ class _HomeScreenState extends State<HomeScreen> {
   List<String> titles = [];
   List<String> dates = [];
   List<String> dlinks = [];
+  String sid = "";
 
   @override
   void initState() {
@@ -33,15 +36,16 @@ class _HomeScreenState extends State<HomeScreen> {
         .querySelectorAll(' tbody > tr:not(:first-child) > td:first-child')
         .map((element) => element.innerHtml.trim())
         .toList();
-    log(titles.toString());
+
     final dates = html
         .querySelectorAll('tbody>tr:not(:first-child)>td:nth-child(1)')
         .map((e) => e.innerHtml.trim())
         .toList();
     final dlinks = html
         .querySelectorAll('tbody>tr:not(:first-child)>td:nth-child(2)>a')
-        .map((e) => e.innerHtml.trim())
+        .map((e) => e.attributes['href'].toString())
         .toList();
+
     log(dlinks.toString());
     setState(() {
       this.titles = titles;
@@ -131,7 +135,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     height: 8,
                   ),
                   TextButton(
-                    onPressed: () => {},
+                    onPressed: () {},
                     child: const Padding(
                       padding: EdgeInsets.fromLTRB(8, 1, 8, 1),
                       child: Text(
@@ -163,7 +167,12 @@ class _HomeScreenState extends State<HomeScreen> {
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 4),
               children: [
-                semContainer("First", Colors.blueAccent, Icons.code),
+                GestureDetector(
+                    onTap: () {
+                      CourseScreen(sid: sid);
+                    },
+                    child:
+                        semContainer("First", Colors.blueAccent, Icons.code)),
                 semContainer("Second", Colors.redAccent, Icons.code),
                 semContainer("Third", Colors.greenAccent, Icons.code),
                 semContainer("Fourth", Colors.blueGrey, Icons.code),
@@ -188,6 +197,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 itemCount: titles.length,
                 itemBuilder: (context, index) {
                   final title = titles[index];
+
                   final date = dates[index];
                   final dlink = dlinks[index];
                   return ListTile(
@@ -206,9 +216,13 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                     ),
                     trailing: IconButton(
-                      icon: const Icon(Icons.download),
+                      icon: const Icon(Icons.remove_red_eye_rounded),
                       color: mobileBackgroundColor,
-                      onPressed: () {},
+                      onPressed: () async {
+                        if (await canLaunchUrlString(dlink)) {
+                          await launchUrlString(dlink);
+                        }
+                      },
                     ),
                   );
                 },
