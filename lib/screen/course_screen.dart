@@ -1,5 +1,4 @@
 import 'package:bca_quiz/models/subject.dart';
-import 'package:bca_quiz/screen/home_screen.dart';
 import 'package:bca_quiz/utils/colors.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -28,18 +27,13 @@ class _CourseScreenState extends State<CourseScreen> {
 
   void _getData() async {
     try {
-      var courseSnap =
-          FirebaseFirestore.instance.collection('subject').snapshots();
+      var courseSnap = await FirebaseFirestore.instance
+          .collection('subject')
+          .where('semester', isEqualTo: currentIndex)
+          .get();
 
-      courseSnap.forEach((element) {
-        for (var element in element.docs) {
-          setState(() {
-            subject.add(Subject.fromSnap(element));
-            semester = subject
-                .where((element) => element.semester == currentIndex)
-                .toList();
-          });
-        }
+      setState(() {
+        semester = courseSnap.docs.map((e) => Subject.fromSnap(e)).toList();
       });
     } catch (e) {
       showSnackBar(e.toString(), context);
@@ -59,6 +53,7 @@ class _CourseScreenState extends State<CourseScreen> {
             onTap: (index) {
               setState(() {
                 currentIndex = index + 1;
+                _getData();
               });
             },
             tabs: const [
