@@ -79,46 +79,26 @@ class _SignupScreenState extends State<SignupScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SafeArea(
-        child: Container(
+    return SafeArea(
+      child: Scaffold(
+        body: Container(
           decoration: const BoxDecoration(
             color: mobileBackgroundColor,
           ),
           padding: const EdgeInsets.symmetric(horizontal: 32),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
+          child: ListView(
             children: [
               Flexible(
                 child: Container(),
                 flex: 1,
               ),
-              Image.asset(
-                'assets/images/BCAquiz.png',
-                width: 150,
+              Align(
+                child: Image.asset(
+                  'assets/images/BCAquiz.png',
+                  width: 150,
+                ),
               ),
-              Stack(
-                children: [
-                  _image != null
-                      ? CircleAvatar(
-                          radius: 64,
-                          backgroundImage: MemoryImage(_image!),
-                        )
-                      : const CircleAvatar(
-                          radius: 64,
-                          backgroundImage: NetworkImage(
-                              "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQzdtrH-5bQQnZmu7ZTCIKUqGneaGkwP04KseoDfFFucE4_vF345hVrGaQeS-0vYmFurm8&usqp=CAU"),
-                        ),
-                  Positioned(
-                    bottom: -10,
-                    left: 80,
-                    child: IconButton(
-                      onPressed: selectImage,
-                      icon: const Icon(Icons.add_a_photo),
-                    ),
-                  ),
-                ],
-              ),
+              Center(child: _buildCircularAvatar()),
               const SizedBox(
                 height: 24,
               ),
@@ -207,6 +187,31 @@ class _SignupScreenState extends State<SignupScreen> {
           ),
         ),
       ),
+    );
+  }
+
+  Stack _buildCircularAvatar() {
+    return Stack(
+      children: [
+        _image != null
+            ? CircleAvatar(
+                radius: 64,
+                backgroundImage: MemoryImage(_image!),
+              )
+            : const CircleAvatar(
+                radius: 64,
+                backgroundImage: NetworkImage(
+                    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQzdtrH-5bQQnZmu7ZTCIKUqGneaGkwP04KseoDfFFucE4_vF345hVrGaQeS-0vYmFurm8&usqp=CAU"),
+              ),
+        Positioned(
+          bottom: -10,
+          left: 80,
+          child: IconButton(
+            onPressed: selectImage,
+            icon: const Icon(Icons.add_a_photo),
+          ),
+        ),
+      ],
     );
   }
 }

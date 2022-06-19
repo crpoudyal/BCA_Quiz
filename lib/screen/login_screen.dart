@@ -50,7 +50,7 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   void navigateToSignup() {
-    Navigator.of(context).push(
+    Navigator.of(context).pushReplacement(
       MaterialPageRoute(
         builder: (context) => const SignupScreen(),
       ),
@@ -59,90 +59,90 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SafeArea(
-        child: Container(
+    return SafeArea(
+      child: Scaffold(
+        body: Container(
           decoration: const BoxDecoration(
             color: mobileBackgroundColor,
           ),
           padding: const EdgeInsets.symmetric(horizontal: 32),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Flexible(
-                child: Container(),
-                flex: 1,
-              ),
-              Image.asset(
-                'assets/images/BCAquiz.png',
-                width: 150,
-              ),
-              TextFieldInput(
-                textEditingController: _emailController,
-                hintText: "Enter your E-mail",
-                textInputType: TextInputType.emailAddress,
-              ),
-              const SizedBox(
-                height: 24,
-              ),
-              TextFieldInput(
-                textEditingController: _passwordController,
-                hintText: "Enter your Password",
-                textInputType: TextInputType.text,
-                isPass: true,
-              ),
-              const SizedBox(
-                height: 24,
-              ),
-              TextButton(
-                onPressed: loginUser,
-                child: _isLoading
-                    ? const Center(
-                        child: Padding(
-                          padding: EdgeInsets.all(5.0),
-                          child: CircularProgressIndicator(
-                            color: Colors.white,
-                          ),
-                        ),
-                      )
-                    : const Text("Login"),
-                style: TextButton.styleFrom(
-                  padding: const EdgeInsets.fromLTRB(60, 0, 60, 0),
-                  primary: Colors.white,
-                  backgroundColor: mobileBottom,
-                ),
-              ),
-              const SizedBox(
-                height: 24,
-              ),
-              Flexible(
-                child: Container(),
-                flex: 2,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Container(
-                    child: const Text(
-                      "Don't have an account ? ",
-                      style: TextStyle(fontWeight: FontWeight.bold),
-                    ),
-                    padding: const EdgeInsets.symmetric(vertical: 8),
+          child: Center(
+            child: ListView(
+              shrinkWrap: true,
+              children: [
+                Align(
+                  child: Image.asset(
+                    'assets/images/BCAquiz.png',
+                    width: 150,
                   ),
-                  GestureDetector(
-                    onTap: navigateToSignup,
-                    child: Container(
+                ),
+                TextFieldInput(
+                  textEditingController: _emailController,
+                  hintText: "Enter your E-mail",
+                  textInputType: TextInputType.emailAddress,
+                ),
+                const SizedBox(
+                  height: 24,
+                ),
+                TextFieldInput(
+                  textEditingController: _passwordController,
+                  hintText: "Enter your Password",
+                  textInputType: TextInputType.text,
+                  isPass: true,
+                ),
+                const SizedBox(
+                  height: 24,
+                ),
+                TextButton(
+                  onPressed: loginUser,
+                  child: _isLoading
+                      ? const Center(
+                          child: Padding(
+                            padding: EdgeInsets.all(5.0),
+                            child: CircularProgressIndicator(
+                              color: Colors.white,
+                            ),
+                          ),
+                        )
+                      : const Text("Login"),
+                  style: TextButton.styleFrom(
+                    padding: const EdgeInsets.fromLTRB(60, 0, 60, 0),
+                    primary: Colors.white,
+                    backgroundColor: mobileBottom,
+                  ),
+                ),
+                const SizedBox(
+                  height: 24,
+                ),
+                Flexible(
+                  child: Container(),
+                  flex: 2,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Container(
                       child: const Text(
-                        "Sign Up",
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold, color: mobileBottom),
+                        "Don't have an account ? ",
+                        style: TextStyle(fontWeight: FontWeight.bold),
                       ),
                       padding: const EdgeInsets.symmetric(vertical: 8),
                     ),
-                  ),
-                ],
-              )
-            ],
+                    GestureDetector(
+                      onTap: navigateToSignup,
+                      child: Container(
+                        child: const Text(
+                          "Sign Up",
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold, color: mobileBottom),
+                        ),
+                        padding: const EdgeInsets.symmetric(vertical: 8),
+                      ),
+                    ),
+                  ],
+                )
+              ],
+            ),
           ),
         ),
       ),
