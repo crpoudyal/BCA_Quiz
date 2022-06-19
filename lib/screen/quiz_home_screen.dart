@@ -1,3 +1,7 @@
+import 'package:bca_quiz/models/question.dart';
+import 'package:bca_quiz/screen/quiz_screen.dart';
+import 'package:bca_quiz/utils/colors.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 class QuizHomeScreen extends StatefulWidget {
@@ -11,12 +15,52 @@ class _QuizHomeScreenState extends State<QuizHomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: mobileBackgroundColor,
       body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Image.asset("assets/images/BCAquiz.png"),
-          ElevatedButton(
-            onPressed: () {},
-            child: const Text("Lets Play"),
+          Center(
+            child: Column(
+              children: [
+                Image.asset(
+                  "assets/images/BCAquiz.png",
+                  height: 150,
+                  width: 150,
+                ),
+                StreamBuilder<QuerySnapshot>(
+                  stream: FirebaseFirestore.instance
+                      .collection("questions")
+                      .snapshots(),
+                  builder: ((context, snapshot) {
+                    if (!snapshot.hasData) {
+                      return const Center(
+                        child: CircularProgressIndicator(),
+                      );
+                    }
+                    final questionDocs = snapshot.data!.docs;
+
+                    final questions = questionDocs
+                        .map((e) => Question.fromQueryDocumentSnapshot(e))
+                        .toList();
+                    return SizedBox(
+                      width: 150,
+                      child: ElevatedButton(
+                        onPressed: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => QuizScreen(
+                                        totalTime: 30,
+                                        questions: questions,
+                                      )));
+                        },
+                        child: const Text("Lets Play"),
+                      ),
+                    );
+                  }),
+                ),
+              ],
+            ),
           )
         ],
       ),
