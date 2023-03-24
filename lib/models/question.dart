@@ -8,25 +8,26 @@ class Question {
   final String question;
   final List<String> answers;
   final String correctAnswer;
-  Question({
-    required this.id,
-    required this.question,
-    required this.answers,
-    required this.correctAnswer,
-  });
+  final String subject;
+  Question(
+      {required this.id,
+      required this.question,
+      required this.answers,
+      required this.correctAnswer,
+      required this.subject});
 
-  Question copyWith({
-    String? id,
-    String? question,
-    List<String>? answers,
-    String? correctAnswer,
-  }) {
+  Question copyWith(
+      {String? id,
+      String? question,
+      List<String>? answers,
+      String? correctAnswer,
+      String? subject}) {
     return Question(
-      id: id ?? this.id,
-      question: question ?? this.question,
-      answers: answers ?? this.answers,
-      correctAnswer: correctAnswer ?? this.correctAnswer,
-    );
+        id: id ?? this.id,
+        question: question ?? this.question,
+        answers: answers ?? this.answers,
+        correctAnswer: correctAnswer ?? this.correctAnswer,
+        subject: subject ?? this.subject);
   }
 
   Map<String, dynamic> toMap() {
@@ -35,16 +36,17 @@ class Question {
       'question': question,
       'answers': answers,
       'correctAnswer': correctAnswer,
+      'subject': subject
     };
   }
 
   factory Question.fromMap(Map<String, dynamic> map) {
     return Question(
-      id: map['id'],
-      question: map['question'],
-      answers: List<String>.from(map['answers']),
-      correctAnswer: map['correctAnswer'],
-    );
+        id: map['id'],
+        question: map['question'],
+        answers: List<String>.from(map['answers']),
+        correctAnswer: map['correctAnswer'],
+        subject: map['subject']);
   }
 
   factory Question.fromQueryDocumentSnapshot(QueryDocumentSnapshot snapshot) {

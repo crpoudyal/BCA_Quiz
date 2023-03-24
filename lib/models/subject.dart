@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Subject {
-  final String sid;
+  final int sid;
   final String sub_name;
   final String sub_code;
   final int semester;
