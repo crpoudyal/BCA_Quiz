@@ -1,7 +1,6 @@
 import 'package:bca_quiz/resources/auth_method.dart';
 import 'package:bca_quiz/responsive/mobile_screen_layout.dart';
 import 'package:bca_quiz/responsive/responsive_layout_screen.dart';
-import 'package:bca_quiz/responsive/web_screen_layout.dart';
 import 'package:bca_quiz/screen/signup_screen.dart';
 import 'package:bca_quiz/utils/utils.dart';
 import 'package:bca_quiz/widgets/text_field_input.dart';
@@ -20,7 +19,9 @@ class _LoginScreenState extends State<LoginScreen> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   bool _isLoading = false;
-  void despose() {
+
+  @override
+  void dispose() {
     super.dispose();
     _emailController.dispose();
     _passwordController.dispose();
@@ -42,7 +43,6 @@ class _LoginScreenState extends State<LoginScreen> {
         MaterialPageRoute(
           builder: (context) => const ResponsiveLayout(
             mobileScreenLayout: MobileScreenLayout(),
-            webScreenLayout: WebScreenLayout(),
           ),
         ),
       );
@@ -106,8 +106,8 @@ class _LoginScreenState extends State<LoginScreen> {
                         )
                       : const Text("Login"),
                   style: TextButton.styleFrom(
+                    foregroundColor: Colors.white,
                     padding: const EdgeInsets.fromLTRB(60, 0, 60, 0),
-                    primary: Colors.white,
                     backgroundColor: mobileBottom,
                   ),
                 ),
