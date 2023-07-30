@@ -3,8 +3,8 @@ import 'dart:developer';
 import 'package:bca_quiz/screen/course_screen.dart';
 import 'package:bca_quiz/screen/home_screen.dart';
 import 'package:bca_quiz/screen/profile_screen.dart';
+import 'package:bca_quiz/screen/ranking_screen.dart';
 import 'package:bca_quiz/screen/search_screen.dart';
-import 'package:bca_quiz/screen/splash_screen.dart';
 import 'package:bca_quiz/utils/colors.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -18,6 +18,7 @@ class MobileScreenLayout extends StatefulWidget {
 
 class _MobileScreenLayoutState extends State<MobileScreenLayout> {
   int _page = 0;
+
   late PageController pageController;
 
   @override
@@ -45,23 +46,23 @@ class _MobileScreenLayoutState extends State<MobileScreenLayout> {
   @override
   Widget build(BuildContext context) {
     String uid = FirebaseAuth.instance.currentUser!.uid;
-    log("user ID: " + uid.toString());
+    log("user ID: $uid");
     String sid = "";
     return Scaffold(
       body: PageView(
+        controller: pageController,
+        onPageChanged: onPageChanged,
         children: [
-          HomeScreen(),
-          SearchScreen(),
+          const HomeScreen(),
+          const SearchScreen(),
           CourseScreen(
             sid: sid,
           ),
-          Container(color: Colors.amber),
+          const RankingScreen(),
           ProfileScreen(
             uid: uid,
           ),
         ],
-        controller: pageController,
-        onPageChanged: onPageChanged,
       ),
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,

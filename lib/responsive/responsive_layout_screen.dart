@@ -1,16 +1,11 @@
 import 'package:bca_quiz/providers/user_provider.dart';
-import 'package:bca_quiz/utils/dimensions.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class ResponsiveLayout extends StatefulWidget {
-  final webScreenLayout;
-  final mobileScreenLayout;
+   final mobileScreenLayout;
 
-  const ResponsiveLayout(
-      {Key? key,
-      required this.webScreenLayout,
-      required this.mobileScreenLayout})
+  const ResponsiveLayout({Key? key, required this.mobileScreenLayout})
       : super(key: key);
 
   @override
@@ -33,11 +28,7 @@ class _ResponsiveLayoutState extends State<ResponsiveLayout> {
   Widget build(BuildContext context) {
     return LayoutBuilder(
       builder: (context, constraints) {
-        if (constraints.maxWidth > webScreenSize) {
-          return widget.webScreenLayout;
-        } else {
-          return widget.mobileScreenLayout;
-        }
+        return widget.mobileScreenLayout;
       },
     );
   }
