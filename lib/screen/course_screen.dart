@@ -1,8 +1,9 @@
 import 'package:bca_quiz/models/subject.dart';
+import 'package:bca_quiz/screen/quiz_home_screen.dart';
 import 'package:bca_quiz/utils/colors.dart';
+import 'package:bca_quiz/utils/utils.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import '../utils/utils.dart';
 
 class CourseScreen extends StatefulWidget {
   final String sid;
@@ -24,6 +25,8 @@ class _CourseScreenState extends State<CourseScreen> {
     _getData();
     super.initState();
   }
+
+  var question = FirebaseFirestore.instance.collection('question').get();
 
   void _getData() async {
     try {
@@ -90,8 +93,13 @@ class _CourseScreenState extends State<CourseScreen> {
                 itemCount: semester.length,
                 itemBuilder: (context, index) => Column(
                   children: [
-                    GestureDetector(
-                      onTap: () {},
+                    InkWell(
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const QuizHomeScreen()));
+                      },
                       child: ListTile(
                         textColor: mobileBackgroundColor,
                         title: Text(
@@ -101,7 +109,7 @@ class _CourseScreenState extends State<CourseScreen> {
                         ),
                         subtitle: Text(semester[index].sub_code),
                       ),
-                    ),
+                    )
                   ],
                 ),
               ),
