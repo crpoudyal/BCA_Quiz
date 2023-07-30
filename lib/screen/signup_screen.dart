@@ -3,12 +3,12 @@ import 'dart:typed_data';
 import 'package:bca_quiz/resources/auth_method.dart';
 import 'package:bca_quiz/responsive/mobile_screen_layout.dart';
 import 'package:bca_quiz/responsive/responsive_layout_screen.dart';
-import 'package:bca_quiz/responsive/web_screen_layout.dart';
 import 'package:bca_quiz/screen/login_screen.dart';
 import 'package:bca_quiz/utils/utils.dart';
 import 'package:bca_quiz/widgets/text_field_input.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 
 import '../utils/colors.dart';
 
@@ -26,7 +26,8 @@ class _SignupScreenState extends State<SignupScreen> {
   final TextEditingController _usernameController = TextEditingController();
   Uint8List? _image;
   bool _isLoading = false;
-  void despose() {
+  @override
+  void dispose() {
     super.dispose();
     _emailController.dispose();
     _passwordController.dispose();
@@ -62,7 +63,6 @@ class _SignupScreenState extends State<SignupScreen> {
         MaterialPageRoute(
           builder: (context) => const ResponsiveLayout(
             mobileScreenLayout: MobileScreenLayout(),
-            webScreenLayout: WebScreenLayout(),
           ),
         ),
       );
@@ -89,8 +89,8 @@ class _SignupScreenState extends State<SignupScreen> {
           child: ListView(
             children: [
               Flexible(
-                child: Container(),
                 flex: 1,
+                child: Container(),
               ),
               Align(
                 child: Image.asset(
@@ -137,6 +137,11 @@ class _SignupScreenState extends State<SignupScreen> {
               ),
               TextButton(
                 onPressed: signUpUser,
+                style: TextButton.styleFrom(
+                  foregroundColor: Colors.white,
+                  padding: const EdgeInsets.fromLTRB(60, 0, 60, 0),
+                  backgroundColor: mobileBottom,
+                ),
                 child: _isLoading
                     ? const Center(
                         child: Padding(
@@ -147,38 +152,33 @@ class _SignupScreenState extends State<SignupScreen> {
                         ),
                       )
                     : const Text("Signup"),
-                style: TextButton.styleFrom(
-                  padding: const EdgeInsets.fromLTRB(60, 0, 60, 0),
-                  primary: Colors.white,
-                  backgroundColor: mobileBottom,
-                ),
               ),
               const SizedBox(
                 height: 24,
               ),
               Flexible(
-                child: Container(),
                 flex: 2,
+                child: Container(),
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Container(
+                    padding: const EdgeInsets.symmetric(vertical: 8),
                     child: const Text(
                       "Already have an account ? ",
                       style: TextStyle(fontWeight: FontWeight.bold),
                     ),
-                    padding: const EdgeInsets.symmetric(vertical: 8),
                   ),
                   GestureDetector(
                     onTap: navigateToLogin,
                     child: Container(
+                      padding: const EdgeInsets.symmetric(vertical: 8),
                       child: const Text(
                         "Login",
                         style: TextStyle(
                             fontWeight: FontWeight.bold, color: mobileBottom),
                       ),
-                      padding: const EdgeInsets.symmetric(vertical: 8),
                     ),
                   ),
                 ],
@@ -200,7 +200,7 @@ class _SignupScreenState extends State<SignupScreen> {
               )
             : const CircleAvatar(
                 radius: 64,
-                backgroundImage: NetworkImage(
+                backgroundImage: CachedNetworkImageProvider(
                     "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQzdtrH-5bQQnZmu7ZTCIKUqGneaGkwP04KseoDfFFucE4_vF345hVrGaQeS-0vYmFurm8&usqp=CAU"),
               ),
         Positioned(
