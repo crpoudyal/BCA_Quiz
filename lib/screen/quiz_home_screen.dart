@@ -42,20 +42,30 @@ class _QuizHomeScreenState extends State<QuizHomeScreen> {
                     final questions = questionDocs
                         .map((e) => Question.fromQueryDocumentSnapshot(e))
                         .toList();
-                    return SizedBox(
-                      width: 150,
-                      child: ElevatedButton(
-                        onPressed: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
+                    return Column(
+                      children: [
+                        SizedBox(
+                          width: 150,
+                          child: ElevatedButton(
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
                                   builder: (context) => QuizScreen(
-                                        totalTime: 30,
-                                        questions: questions,
-                                      )));
-                        },
-                        child: const Text("Lets Play"),
-                      ),
+                                    totalTime: 50,
+                                    questions: questions,
+                                  ),
+                                ),
+                              );
+                            },
+                            child: const Text("Lets Play"),
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        Text("Total Question :" + questions.length.toString()),
+                      ],
                     );
                   }),
                 ),

@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:bca_quiz/models/question.dart';
 import 'package:bca_quiz/screen/result_screen.dart';
 import 'package:bca_quiz/utils/colors.dart';
+import 'package:bca_quiz/widgets/answer_tile.dart';
 import 'package:flutter/material.dart';
 
 class QuizScreen extends StatefulWidget {
@@ -19,7 +20,7 @@ class _QuizScreenState extends State<QuizScreen> {
   late Timer _timer;
   int _currentIndex = 0;
   String _selectedAnswer = "";
-  int _score = 0;
+  int score = 0;
 
   @override
   void initState() {
@@ -99,7 +100,7 @@ class _QuizScreenState extends State<QuizScreen> {
                             _selectedAnswer = answer;
                           });
                           if (answer == currentQuestion.correctAnswer) {
-                            _score++;
+                            score++;
                           }
                           Future.delayed(const Duration(milliseconds: 200), () {
                             if (_currentIndex == widget.questions.length - 1) {
@@ -128,50 +129,10 @@ class _QuizScreenState extends State<QuizScreen> {
         builder: (context) => ResultScreen(
           questions: widget.questions,
           totalTime: widget.totalTime,
-          score: _score,
+          score: score,
         ),
       ),
     );
   }
 }
 
-class AnswerTile extends StatelessWidget {
-  const AnswerTile({
-    Key? key,
-    required this.isSelected,
-    required this.answer,
-    required this.correctAnswer,
-    required this.onTap,
-  }) : super(key: key);
-
-  final bool isSelected;
-  final String answer;
-  final String correctAnswer;
-  final Function onTap;
-
-  @override
-  Widget build(BuildContext context) {
-    return Card(
-      color: cardColor,
-      child: ListTile(
-        onTap: () => onTap(),
-        title: Text(
-          answer,
-          style: TextStyle(
-            fontSize: 18,
-            color: isSelected ? Colors.white : Colors.black,
-          ),
-        ),
-      ),
-    );
-  }
-
-  Color get cardColor {
-    if (!isSelected) return Colors.white;
-
-    if (answer == correctAnswer) {
-      return Colors.greenAccent;
-    }
-    return Colors.redAccent;
-  }
-}
