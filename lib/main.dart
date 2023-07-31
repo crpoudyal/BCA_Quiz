@@ -1,7 +1,6 @@
 import 'package:bca_quiz/providers/user_provider.dart';
 import 'package:bca_quiz/responsive/mobile_screen_layout.dart';
 import 'package:bca_quiz/responsive/responsive_layout_screen.dart';
-import 'package:bca_quiz/responsive/web_screen_layout.dart';
 import 'package:bca_quiz/screen/login_screen.dart';
 import 'package:bca_quiz/utils/colors.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -41,7 +40,7 @@ class MyApp extends StatelessWidget {
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        title: 'BCA Quiz',
+        title: 'BCA Hub',
         theme: ThemeData.dark().copyWith(
           scaffoldBackgroundColor: backgroundColor,
         ),
@@ -52,7 +51,6 @@ class MyApp extends StatelessWidget {
               if (snapshot.hasData) {
                 return const ResponsiveLayout(
                   mobileScreenLayout: MobileScreenLayout(),
-                  webScreenLayout: WebScreenLayout(),
                 );
               } else if (snapshot.hasError) {
                 return Center(
