@@ -7,7 +7,9 @@ import 'package:flutter/material.dart';
 
 class CourseScreen extends StatefulWidget {
   final String sid;
-  const CourseScreen({Key? key, required this.sid}) : super(key: key);
+  int index;
+  CourseScreen({Key? key, required this.sid, required this.index})
+      : super(key: key);
 
   @override
   State<CourseScreen> createState() => _CourseScreenState();
@@ -22,6 +24,9 @@ class _CourseScreenState extends State<CourseScreen> {
 
   @override
   void initState() {
+    setState(() {
+      currentIndex = widget.index + 1;
+    });
     _getData();
     super.initState();
   }
@@ -47,6 +52,7 @@ class _CourseScreenState extends State<CourseScreen> {
   Widget build(BuildContext context) {
     return DefaultTabController(
       length: 8,
+      initialIndex: widget.index,
       child: Scaffold(
         appBar: AppBar(
           backgroundColor: mobileBackgroundColor,
@@ -98,7 +104,9 @@ class _CourseScreenState extends State<CourseScreen> {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => const QuizHomeScreen()));
+                                builder: (context) => QuizHomeScreen(
+                                      subName: semester[index].sub_name,
+                                    )));
                       },
                       child: ListTile(
                         textColor: mobileBackgroundColor,

@@ -83,7 +83,9 @@ class _HomeScreenState extends State<HomeScreen> {
                       Navigator.pushReplacement(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => const QuizHomeScreen()));
+                              builder: (context) => QuizHomeScreen(
+                                    subName: 'C programming',
+                                  )));
                     },
                     style: TextButton.styleFrom(
                       foregroundColor: Colors.white,
@@ -122,48 +124,54 @@ class _HomeScreenState extends State<HomeScreen> {
                     Navigator.pushReplacement(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => const CourseScreen(
+                            builder: (context) => CourseScreen(
                                   sid: '',
+                                  index: 0,
                                 )));
                   }),
                   semContainer("Second", Colors.redAccent, Icons.code, () {
                     Navigator.pushReplacement(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => const CourseScreen(
+                            builder: (context) => CourseScreen(
                                   sid: '',
+                                  index: 1,
                                 )));
                   }),
                   semContainer("Third", Colors.greenAccent, Icons.code, () {
                     Navigator.pushReplacement(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => const CourseScreen(
+                            builder: (context) => CourseScreen(
                                   sid: '',
+                                  index: 2,
                                 )));
                   }),
                   semContainer("Fourth", Colors.blueGrey, Icons.code, () {
                     Navigator.pushReplacement(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => const CourseScreen(
+                            builder: (context) => CourseScreen(
                                   sid: '',
+                                  index: 3,
                                 )));
                   }),
                   semContainer("Fifth", Colors.purpleAccent, Icons.code, () {
                     Navigator.pushReplacement(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => const CourseScreen(
+                            builder: (context) => CourseScreen(
                                   sid: '',
+                                  index: 4,
                                 )));
                   }),
                   semContainer("Sixth", Colors.cyan, Icons.code, () {
                     Navigator.pushReplacement(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => const CourseScreen(
+                            builder: (context) => CourseScreen(
                                   sid: '',
+                                  index: 5,
                                 )));
                   }),
                   semContainer("Seventh", Colors.deepOrangeAccent, Icons.code,
@@ -171,16 +179,18 @@ class _HomeScreenState extends State<HomeScreen> {
                     Navigator.pushReplacement(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => const CourseScreen(
+                            builder: (context) => CourseScreen(
                                   sid: '',
+                                  index: 6,
                                 )));
                   }),
                   semContainer("Eighth", Colors.brown, Icons.code, () {
                     Navigator.pushReplacement(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => const CourseScreen(
+                            builder: (context) => CourseScreen(
                                   sid: '',
+                                  index: 7,
                                 )));
                   }),
                 ],
