@@ -57,6 +57,7 @@ class _MobileScreenLayoutState extends State<MobileScreenLayout> {
           const SearchScreen(),
           CourseScreen(
             sid: sid,
+            index: 0,
           ),
           const RankingScreen(),
           ProfileScreen(
