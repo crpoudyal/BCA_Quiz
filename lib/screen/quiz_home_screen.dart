@@ -1,11 +1,16 @@
-import 'package:bca_quiz/models/question.dart';
-import 'package:bca_quiz/screen/quiz_screen.dart';
-import 'package:bca_quiz/utils/colors.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
+import 'package:bca_quiz/models/question.dart';
+import 'package:bca_quiz/screen/quiz_screen.dart';
+import 'package:bca_quiz/utils/colors.dart';
+
 class QuizHomeScreen extends StatefulWidget {
-  const QuizHomeScreen({Key? key}) : super(key: key);
+  String subName;
+  QuizHomeScreen({
+    Key? key,
+    required this.subName,
+  }) : super(key: key);
 
   @override
   State<QuizHomeScreen> createState() => _QuizHomeScreenState();
@@ -27,6 +32,10 @@ class _QuizHomeScreenState extends State<QuizHomeScreen> {
                   height: 150,
                   width: 150,
                 ),
+                Text(widget.subName),
+                const SizedBox(
+                  height: 40,
+                ),
                 StreamBuilder<QuerySnapshot>(
                   stream: FirebaseFirestore.instance
                       .collection("questions")
@@ -41,7 +50,12 @@ class _QuizHomeScreenState extends State<QuizHomeScreen> {
 
                     final questions = questionDocs
                         .map((e) => Question.fromQueryDocumentSnapshot(e))
-                        .toList();
+                        .toList()
+                        .where(
+                      (element) {
+                        return element.subject.contains(widget.subName);
+                      },
+                    ).toList();
                     return Column(
                       children: [
                         SizedBox(
@@ -64,7 +78,7 @@ class _QuizHomeScreenState extends State<QuizHomeScreen> {
                         const SizedBox(
                           height: 20,
                         ),
-                        Text("Total Question :" + questions.length.toString()),
+                        Text("Total Question : ${questions.length}"),
                       ],
                     );
                   }),
