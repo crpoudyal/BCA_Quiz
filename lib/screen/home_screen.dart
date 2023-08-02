@@ -121,7 +121,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
                 children: [
                   semContainer("First", Colors.blueAccent, Icons.code, () {
-                    Navigator.pushReplacement(
+                    Navigator.push(
                         context,
                         MaterialPageRoute(
                             builder: (context) => CourseScreen(
@@ -130,7 +130,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 )));
                   }),
                   semContainer("Second", Colors.redAccent, Icons.code, () {
-                    Navigator.pushReplacement(
+                    Navigator.push(
                         context,
                         MaterialPageRoute(
                             builder: (context) => CourseScreen(
@@ -139,7 +139,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 )));
                   }),
                   semContainer("Third", Colors.greenAccent, Icons.code, () {
-                    Navigator.pushReplacement(
+                    Navigator.push(
                         context,
                         MaterialPageRoute(
                             builder: (context) => CourseScreen(
@@ -148,7 +148,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 )));
                   }),
                   semContainer("Fourth", Colors.blueGrey, Icons.code, () {
-                    Navigator.pushReplacement(
+                    Navigator.push(
                         context,
                         MaterialPageRoute(
                             builder: (context) => CourseScreen(
@@ -157,7 +157,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 )));
                   }),
                   semContainer("Fifth", Colors.purpleAccent, Icons.code, () {
-                    Navigator.pushReplacement(
+                    Navigator.push(
                         context,
                         MaterialPageRoute(
                             builder: (context) => CourseScreen(
@@ -166,7 +166,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 )));
                   }),
                   semContainer("Sixth", Colors.cyan, Icons.code, () {
-                    Navigator.pushReplacement(
+                    Navigator.push(
                         context,
                         MaterialPageRoute(
                             builder: (context) => CourseScreen(
@@ -176,7 +176,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   }),
                   semContainer("Seventh", Colors.deepOrangeAccent, Icons.code,
                       () {
-                    Navigator.pushReplacement(
+                    Navigator.push(
                         context,
                         MaterialPageRoute(
                             builder: (context) => CourseScreen(
@@ -185,7 +185,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 )));
                   }),
                   semContainer("Eighth", Colors.brown, Icons.code, () {
-                    Navigator.pushReplacement(
+                    Navigator.push(
                         context,
                         MaterialPageRoute(
                             builder: (context) => CourseScreen(

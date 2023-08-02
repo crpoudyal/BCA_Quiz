@@ -8,16 +8,18 @@ import 'package:flutter/material.dart';
 import '../responsive/mobile_screen_layout.dart';
 
 class ResultScreen extends StatefulWidget {
+  final String subjectName;
+  final List<Question> questions;
+  final int totalTime;
   const ResultScreen({
     Key? key,
     required this.score,
     required this.questions,
     required this.totalTime,
+    required this.subjectName,
   }) : super(key: key);
 
   final int score;
-  final List<Question> questions;
-  final int totalTime;
 
   @override
   _ResultScreenState createState() => _ResultScreenState();
@@ -38,6 +40,8 @@ class _ResultScreenState extends State<ResultScreen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            Text(widget.subjectName),
+            const SizedBox(height: 20),
             Text(
               'Result: ${widget.score} / ${widget.questions.length}',
               style: const TextStyle(
@@ -53,6 +57,7 @@ class _ResultScreenState extends State<ResultScreen> {
                     builder: (context) => QuizScreen(
                       totalTime: widget.totalTime,
                       questions: widget.questions,
+                      subjectName: "",
                     ),
                   ),
                 );

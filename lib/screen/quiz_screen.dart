@@ -7,9 +7,14 @@ import 'package:bca_quiz/widgets/answer_tile.dart';
 import 'package:flutter/material.dart';
 
 class QuizScreen extends StatefulWidget {
-  const QuizScreen({Key? key, required this.totalTime, required this.questions})
+  const QuizScreen(
+      {Key? key,
+      required this.totalTime,
+      required this.questions,
+      required this.subjectName})
       : super(key: key);
   final int totalTime;
+  final String subjectName;
   final List<Question> questions;
   @override
   State<QuizScreen> createState() => _QuizScreenState();
@@ -20,7 +25,7 @@ class _QuizScreenState extends State<QuizScreen> {
   late Timer _timer;
   int _currentIndex = 0;
   String _selectedAnswer = "";
-  int score = 0;
+  int _score = 0;
 
   @override
   void initState() {
@@ -54,10 +59,10 @@ class _QuizScreenState extends State<QuizScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Center(
+              Center(
                 child: Text(
-                  "C Programming",
-                  style: TextStyle(fontSize: 18, color: Colors.white),
+                  widget.subjectName,
+                  style: const TextStyle(fontSize: 18, color: Colors.white),
                 ),
               ),
               const SizedBox(
@@ -100,7 +105,7 @@ class _QuizScreenState extends State<QuizScreen> {
                             _selectedAnswer = answer;
                           });
                           if (answer == currentQuestion.correctAnswer) {
-                            score++;
+                            _score++;
                           }
                           Future.delayed(const Duration(milliseconds: 200), () {
                             if (_currentIndex == widget.questions.length - 1) {
@@ -129,10 +134,10 @@ class _QuizScreenState extends State<QuizScreen> {
         builder: (context) => ResultScreen(
           questions: widget.questions,
           totalTime: widget.totalTime,
-          score: score,
+          subjectName: widget.subjectName,
+          score: _score,
         ),
       ),
     );
   }
 }
-

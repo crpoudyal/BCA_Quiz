@@ -42,11 +42,11 @@ class Question {
 
   factory Question.fromMap(Map<String, dynamic> map) {
     return Question(
-        id: map['id'],
-        question: map['question'],
-        answers: List<String>.from(map['answers']),
-        correctAnswer: map['correctAnswer'],
-        subject: map['subject']);
+        id: map['id'] ?? [],
+        question: map['question'] ?? [],
+        answers: List<String>.from(map['answers'] ?? []),
+        correctAnswer: map['correctAnswer'] ?? [],
+        subject: map['subject'] ?? []);
   }
 
   factory Question.fromQueryDocumentSnapshot(QueryDocumentSnapshot snapshot) {

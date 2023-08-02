@@ -1,3 +1,6 @@
+import 'dart:developer';
+
+import 'package:bca_quiz/responsive/mobile_screen_layout.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
@@ -41,39 +44,57 @@ class _QuizHomeScreenState extends State<QuizHomeScreen> {
                       .collection("questions")
                       .snapshots(),
                   builder: ((context, snapshot) {
-                    if (!snapshot.hasData) {
+                    if (snapshot.connectionState == ConnectionState.waiting) {
                       return const Center(
                         child: CircularProgressIndicator(),
                       );
+                    } else if (snapshot.data == null || snapshot.hasError) {
+                      return const Center(
+                        child: Text('Error fetching data'),
+                      );
                     }
+
                     final questionDocs = snapshot.data!.docs;
 
                     final questions = questionDocs
                         .map((e) => Question.fromQueryDocumentSnapshot(e))
-                        .toList()
-                        .where(
-                      (element) {
-                        return element.subject.contains(widget.subName);
-                      },
-                    ).toList();
+                        .where((element) =>
+                            element.subject.contains(widget.subName))
+                        .toList();
+
+                    log("Question $questions");
                     return Column(
                       children: [
                         SizedBox(
                           width: 150,
-                          child: ElevatedButton(
-                            onPressed: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => QuizScreen(
-                                    totalTime: 50,
-                                    questions: questions,
-                                  ),
+                          child: questions.isEmpty
+                              ? ElevatedButton(
+                                  onPressed: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) =>
+                                            const MobileScreenLayout(),
+                                      ),
+                                    );
+                                  },
+                                  child: const Text("Go to Home"),
+                                )
+                              : ElevatedButton(
+                                  onPressed: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => QuizScreen(
+                                          totalTime: 50,
+                                          questions: questions,
+                                          subjectName: widget.subName,
+                                        ),
+                                      ),
+                                    );
+                                  },
+                                  child: const Text("Lets Play"),
                                 ),
-                              );
-                            },
-                            child: const Text("Lets Play"),
-                          ),
                         ),
                         const SizedBox(
                           height: 20,

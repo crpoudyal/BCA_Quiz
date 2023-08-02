@@ -30,7 +30,7 @@ class _SearchScreenState extends State<SearchScreen> {
           decoration: const InputDecoration(
             labelText: 'Serach for a user',
           ),
-          onFieldSubmitted: (String _) {
+          onChanged: (String _) {
             setState(() {
               isShowUsers = true;
             });

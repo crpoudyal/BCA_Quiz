@@ -9,6 +9,10 @@ Widget semContainer(String sName, Color clr, IconData ico, Function onTap) {
       margin: const EdgeInsets.all(5),
       width: 50,
       height: 50,
+      decoration: BoxDecoration(
+        color: clr,
+        borderRadius: BorderRadius.circular(5),
+      ),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -20,10 +24,6 @@ Widget semContainer(String sName, Color clr, IconData ico, Function onTap) {
             style: const TextStyle(color: Colors.white),
           )
         ],
-      ),
-      decoration: BoxDecoration(
-        color: clr,
-        borderRadius: BorderRadius.circular(5),
       ),
     ),
   );
